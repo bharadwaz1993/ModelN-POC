@@ -1,12 +1,13 @@
-FROM eclipse-temurin:17-jdk-jammy as build
-WORKDIR /app
-COPY pom.xml .
-RUN mvn -q -e -B dependency:go-offline
-COPY src ./src
-RUN mvn -q -e -B package -DskipTests
+# Very simple hello-world app using Nginx
+FROM nginx:alpine
 
-FROM eclipse-temurin:17-jre-jammy
-WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Remove default html
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy our simple hello page
+COPY index.html /usr/share/nginx/html/index.html
+
+# Expose HTTP
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
