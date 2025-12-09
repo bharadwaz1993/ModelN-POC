@@ -13,10 +13,10 @@ pipeline {
       }
     }
 
-    stage('Build & Test') {
+    stage('Build (placeholder)') {
       steps {
-        // Adjust for your stack: mvn, gradle, npm, etc.
-        sh 'mvn -q -e clean test'
+        // Replace with your real build (mvn / npm / gradle) if needed
+        sh 'echo "No app build step yet; using Dockerfile only"'
       }
     }
 
@@ -43,26 +43,29 @@ pipeline {
 
     stage('Update Helm values.yaml') {
       steps {
-        // Replace the tag line under 'image:' in helm/values.yaml
-        sh """
-          sed -i 's/^  tag: .*/  tag: "${IMAGE_TAG}"/' helm/values.yaml
-        """
+        // Update image.tag in helm/values.yaml to the new build number
+        sh '''
+          sed -i 's/^  tag: .*/  tag: "'${IMAGE_TAG}'"/' helm/values.yaml
+        '''
       }
     }
 
-    stage('Commit & Push changes to Git') {
+    stage('Commit & Push changes to GitHub') {
       steps {
-        sshagent(credentials: ['github-ssh-key']) {
-          sh """
+        withCredentials([usernamePassword(credentialsId: 'github-https-creds',
+                                          usernameVariable: 'GIT_USER',
+                                          passwordVariable: 'GIT_TOKEN')]) {
+          sh '''
             git config user.email "jenkins@modeln-poc.local"
             git config user.name "Jenkins"
 
             git add helm/values.yaml
+            git commit -m "Deploy image tag '${IMAGE_TAG}'" || echo "No changes to commit"
 
-            git commit -m "Deploy image tag ${IMAGE_TAG}" || echo "No changes to commit"
+            git remote set-url origin https://$GIT_USER:$GIT_TOKEN@github.com/bharadwaz1993/ModelN-POC.git
 
             git push origin HEAD:main
-          """
+          '''
         }
       }
     }
