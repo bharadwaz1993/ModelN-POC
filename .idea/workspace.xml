@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43157dba-b7fa-4a63-a8ab-84680d2e8302" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="43157dba-b7fa-4a63-a8ab-84680d2e8302" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +34,19 @@
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/DELL/Desktop/ModelNPOC/ModelN-POC/src/main/src/Main.java&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="ModelN-POC" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="ModelN-POC" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="43157dba-b7fa-4a63-a8ab-84680d2e8302" name="Changes" comment="" />
